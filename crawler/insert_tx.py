@@ -3,19 +3,18 @@ from eip4844.setting import *
 from pymongo import MongoClient
 
 if __name__ == "__main__":
-    start = int(sys.argv[1])
-    end   = int(sys.argv[2])
     
-    assert start // 1000000 == (end-1) // 1000000 # Transaction data should be stored in the same collection
-
     client = MongoClient(f'mongodb://{MONGODB_USER}:{MONGODB_PASSWORD}@localhost:27017/')
-    
     db = client['ethereum']
-    # collection = db[f'transactions_{start//1000000 * 100}_{start // 1000000 * 100 + 100}']
-    collection = db[f'transactions_1600_1700']
+    collection = db[f'transactions']
     
     w3 = Web3(Web3.HTTPProvider(f"""http://localhost:{PORT_NUM}"""))
     
+    start = collection.find_one(sort=[("block", -1)])['block']+1
+    end = w3.eth.block_number
+    
+    print(f"Starting updates from Slot #{start} to #{end}")
+
     documents = []
     for block in range(start, end):
         txs = w3.eth.getBlock(block, full_transactions=True)['transactions']
