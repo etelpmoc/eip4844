@@ -14,7 +14,7 @@ if __name__ == "__main__":
     start = collection.find_one(sort=[("slot", -1)])['slot']+1
     end   = int(json.loads(r.text)['data'][0]['header']['message']['slot'])
     
-    print(f"Starting updates from Slot #{start} to #{end}")
+    print(f"Starting updates from Block #{start} to #{end}")
     
     documents = []
     for slot in range(start, end):
