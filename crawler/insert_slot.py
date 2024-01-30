@@ -10,25 +10,30 @@ if __name__ == "__main__":
     collection = db['slots']
     
     r = requests.get(f"http://localhost:{BEACON_PORT_NUM}/eth/v1/beacon/headers")
-    
-    start = collection.find_one(sort=[("slot", -1)])['slot']+1
+    try:
+        start = collection.find_one(sort=[("slot", -1)])['slot']+1
+    except:
+        start = 5000000
     end   = int(json.loads(r.text)['data'][0]['header']['message']['slot'])
     
-    print(f"Starting updates from Block #{start} to #{end}")
+    print(f"Starting updates from Slot #{start} to #{end}")
     
     documents = []
     for slot in range(start, end):
         r = requests.get(f"http://localhost:{BEACON_PORT_NUM}/eth/v2/beacon/blocks/{slot}")
         try:
             message = json.loads(r.text)['data']['message']
+            payload = message['body']['execution_payload']
         except:
             continue            
 
         documents.append({'slot':slot,
-                          'block':message['body']['execution_payload']['block_number'],
-                          'proposer_index':message['proposer_index'],
+                          'block':int(payload['block_number']),
+                          'proposer_index':int(message['proposer_index']),
+                          'timestamp': int(payload['timestamp']),
                           'attestation_length':len(message['body']['attestations']),
-                          'fee_recipient':message['body']['execution_payload']['fee_recipient']
+                          'fee_recipient':payload['fee_recipient'],
+                          'parent_root':message['parent_root'], 'state_root':message['state_root']
                           })
         
         if slot%1000==0 or slot == end-1:

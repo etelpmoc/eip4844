@@ -22,9 +22,7 @@ if __name__ == "__main__":
         documents.append({'block':block, 'baseFeePerGas': x['baseFeePerGas'],
                           'gasUsed':x['gasUsed'], 'size':x['size'], 
                           'txNum': len(x['transactions'])})
-        
-        collection.insert_many(documents)
-        
+                
         if block%1000==0 or block == end-1:
             collection.insert_many(documents)
             documents = []
