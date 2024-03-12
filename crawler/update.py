@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import subprocess
 
 if __name__ == "__main__":
-    files_to_execute = ["insert_block.py", "insert_slot.py", "insert_tx.py", "insert_fee.py"]
+    files_to_execute = ["insert_block.py", "insert_slot.py", "insert_tx.py", "insert_fee.py", "insert_rollup_tx"]
 
     for file_name in files_to_execute:
         try:
