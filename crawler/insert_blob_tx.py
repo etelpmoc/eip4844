@@ -6,41 +6,50 @@ if __name__ == "__main__":
     
     client = MongoClient(f'mongodb://{MONGODB_USER}:{MONGODB_PASSWORD}@localhost:27017/')
     db = client['ethereum']
-    collection = db[f'blob_transactions']
-    
+    blob_transactions = db[f'blob_transactions']
+    slots = db['slots']
+    blocks = db['blocks']
     
     w3 = Web3(Web3.HTTPProvider(f"""http://localhost:{PORT_NUM}"""))
 
     try:
-        start = collection.find_one(sort=[("block", -1)])['block']+1
+        start = blob_transactions.find_one(sort=[("block", -1)])['block']+1
     except:
-        start = 19426587
+        start = 19426587 # Dencun start
+    
+    end = blocks.find_one(sort=[("block", -1)])['block']+1
 
-    end = w3.eth.block_number
-
-    print(f"Starting updates from Slot #{start} to #{end}")
+    print(f"Starting updates from Block #{start} to #{end}")
 
     documents = []
     for block in range(start, end):
         txs = w3.eth.getBlock(block, full_transactions=True)['transactions']
 
         for tx in txs:
-            if tx['type'] != '0x3':
+            if tx['type'] != '0x3': # Filter out blob trasnactions
                 continue
 
             num_bytes = int((len(tx['input'])-2)/2)
+            
+            try:
+                slot = slots.find_one({"block": block})['slot'] # Find corresponding slot number in slots table
+            except:
+                print("cannot find slot at block #", block)
+                continue
+            
             documents.append({'block':block,
                               'tx_hash':tx['hash'].hex(),
                               'sender':tx['from'],
                               'recipient':tx['to'],
                               'tx_index':tx['transactionIndex'],
                               'calldata_size':num_bytes,
-                              'blobVersionedHashes' : tx['blobVersionedHashes']
+                              'blobVersionedHashes' : tx['blobVersionedHashes'],
+                              'slot':slot
                               })
 
         if block%100==0 or block == end-1:
             if documents:
-                collection.insert_many(documents)
+                blob_transactions.insert_many(documents)
                 documents = []
                 print(block)
 
