@@ -18,10 +18,16 @@ if __name__ == "__main__":
     documents = []
     for block in range(start, end):
         x = w3.eth.getBlock(block)
+
+        if block < 19426587:
+            blobGasUsed = 0
+        else:
+            blobGasUsed = x['blobGasUsed']
         
         documents.append({'block':block, 'baseFeePerGas': x['baseFeePerGas'],
                           'gasUsed':x['gasUsed'], 'size':x['size'], 
-                          'txNum': len(x['transactions'])})
+                          'txNum': len(x['transactions']),
+                          'blobGasUsed':x['blobGasUsed']})
                 
         if block%1000==0 or block == end-1:
             collection.insert_many(documents)

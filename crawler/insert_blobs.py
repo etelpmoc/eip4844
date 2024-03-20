@@ -20,10 +20,15 @@ if __name__ == "__main__":
     db = client['ethereum']
     blob_transactions = db[f'blob_transactions']
     blob_sidecars = db['blobs']
-
+    
+    try:
+        start = blob_sidecars.find_one(sort=[("block", -1)])['block']+1
+    except:
+        start = 0
+    
     documents = []
     temp = 0
-    for doc in blob_transactions.find({}):
+    for doc in blob_transactions.find({'block':{'$gte':start}}):
         if temp == doc['block']: 
             continue
         blobs = requests.get(f"http://localhost:{BEACON_PORT_NUM}/eth/v1/beacon/blob_sidecars/{doc['slot']}").json()['data']
@@ -31,7 +36,7 @@ if __name__ == "__main__":
         for blob in blobs:
             documents.append({'slot':doc['slot'],
                               'block':doc['block'],
-                              'blob_idnex':blob['index'],
+                              'blob_idnex':int(blob['index']),
                               'blob':blob['blob'],
                               'kzg_commitment':blob['kzg_commitment'],
                               'size':calculate_actual_size(blob['blob'])
