@@ -44,7 +44,10 @@ if __name__ == "__main__":
                               'tx_index':tx['transactionIndex'],
                               'calldata_size':num_bytes,
                               'blobVersionedHashes' : tx['blobVersionedHashes'],
-                              'slot':slot
+                              'slot':slot,
+                              'max_fee_per_blob_gas': int(tx['maxFeePerBlobGas'],16),
+                              'max_fee_per_gas': tx['maxFeePerGas'],
+                              'max_priority_fee_per_gas': tx['maxPriorityFeePerGas']
                               })
 
         if block%100==0 or block == end-1:

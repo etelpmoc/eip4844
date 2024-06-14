@@ -21,6 +21,13 @@ if __name__ == "__main__":
         txs = w3.eth.getBlock(block, full_transactions=True)['transactions']
         
         for tx in txs:
+            if tx['type'] == '0x0' or tx['type'] == '0x1':
+                maxFeePerGas = tx['gasPrice']
+                maxPriorityFeePerGas = tx['gasPrice']
+            else:
+                maxFeePerGas = tx['maxFeePerGas']
+                maxPriorityFeePerGas = tx['maxPriorityFeePerGas']
+                
             tx_hash = tx['hash'].hex()
             receipt = w3.eth.getTransactionReceipt(tx_hash)
 
@@ -32,7 +39,9 @@ if __name__ == "__main__":
                               'tx_index':tx['transactionIndex'],
                               'calldata_size':num_bytes,
                               'gas_used':receipt['gasUsed'],
-                              'effective_gas_price':receipt['effectiveGasPrice']
+                              'effective_gas_price':receipt['effectiveGasPrice'],
+                              'max_fee_per_gas' : maxFeePerGas, 
+                              'max_priority_fee_per_gas' : maxPriorityFeePerGas
                               })
         
         if block%10==0 or block == end-1:
