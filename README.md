@@ -1,6 +1,8 @@
 # eip4844
 This repository is dedicated to the empirical analysis of the impacts of the EIP 4844 upgrade. The code was used in the study titled ["Impact of EIP-4844 on Ethereum: Consensus Security, Ethereum Usage, Rollup Transaction Dynamics, and Blob Gas Fee Markets"](https://arxiv.org/abs/2405.03183).
 
+The dataset is available at https://drive.google.com/drive/folders/1QAUf3QsMfbx0AwgLKb9OnPqTa15KgA7A?usp=drive_link.
+
 ## Prerequisites
 - python 3.12.2
 
