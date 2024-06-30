@@ -6,8 +6,7 @@ The dataset is available at https://drive.google.com/drive/folders/1QAUf3QsMfbx0
 ## Prerequisites
 - python 3.12.2
 
-> We have collected log from prysm node before and after the Ethereum upgrade and stored it in MongoDB for use. The data upload is still in progress.
-
+We have collected logs from the prysm node before and after the Ethereum upgrade and stored them in MongoDB. We also have gathered data from various sources such as L2Beats and explorers like Etherscan. The data is available [here](https://drive.google.com/drive/folders/1xwOJiaISzptNMoAefusgmaUtD4rl1dr_?usp=sharing).
 
 ## Directory Structure
 
