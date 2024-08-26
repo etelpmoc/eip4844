@@ -15,4 +15,4 @@ We have collected logs from the prysm node before and after the Ethereum upgrade
 - **4_3_rollup_transactions**: Analyzes changes in rollup transaction volume and delays to understand the activity changes caused by EIP 4844.
 - **4_4_blob_gas_analysis**: Analyzes blob gas fees to understand the dynamics of the blob gas fee market.
 
-**Crawler:** Code for data crawling from various sources(specified in the code).
+**Crawler:** Code for crawling Ethereum data, rollup data from various sources (specified in the code).
