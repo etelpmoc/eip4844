@@ -10,6 +10,10 @@ It provides analysis scripts for evaluating Ethereum node logs, rollup activity,
 - MongoDB 7.0.3
 - requirements.txt
 
+```
+pip install -r requirements.txt
+```
+
 ## Data
 We have collected logs from the prysm node before and after the Ethereum upgrade and stored them in MongoDB. We also have gathered data from various sources such as L2Beats and explorers like Etherscan. The data is available [here](https://drive.google.com/drive/folders/1xwOJiaISzptNMoAefusgmaUtD4rl1dr_?usp=sharing).
 
@@ -52,3 +56,12 @@ This category includes 12 files spanning major rollup networks (Arbitrum, Optimi
 **Crawler:** Code for crawling Ethereum data, rollup data from various sources (specified in the code).
 
 - This is not necessary if you download preprocessed data from above google drive link.
+
+## Citation
+
+@misc{eip4844impact2025,
+  title = {Impact of EIP-4844 on Ethereum: Consensus Security, Ethereum Usage, Rollup Transaction Dynamics, and Blob Gas Fee Markets},
+  author = {Author(s) Redacted},
+  year = {2025},
+  note = {Empirical study on Ethereum post-EIP-4844},
+}
