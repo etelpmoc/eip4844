@@ -1,5 +1,9 @@
 # eip4844
-This repository contains the code and data used in our study: ["Impact of EIP-4844 on Ethereum: Consensus Security, Ethereum Usage, Rollup Transaction Dynamics, and Blob Gas Fee Markets"](https://arxiv.org/abs/2405.03183). It provides analysis scripts for evaluating Ethereum node logs, rollup activity, and fee market behavior before and after the EIP-4844 upgrade. Users can reproduce all figures in the paper and explore the dataset via the provided tools.
+This repository contains the code and data used in our study:
+
+["Impact of EIP-4844 on Ethereum: Consensus Security, Ethereum Usage, Rollup Transaction Dynamics, and Blob Gas Fee Markets"](https://arxiv.org/abs/2405.03183). 
+
+It provides analysis scripts for evaluating Ethereum node logs, rollup activity, and fee market behavior before and after the EIP-4844 upgrade. Users can reproduce all figures in the paper and explore the dataset via the provided tools.
 
 ## Prerequisites
 - python 3.12.2
