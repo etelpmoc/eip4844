@@ -58,10 +58,11 @@ This category includes 12 files spanning major rollup networks (Arbitrum, Optimi
 - This is not necessary if you download preprocessed data from above google drive link.
 
 ## Citation
-
+```
 @misc{eip4844impact2025,
   title = {Impact of EIP-4844 on Ethereum: Consensus Security, Ethereum Usage, Rollup Transaction Dynamics, and Blob Gas Fee Markets},
   author = {Author(s) Redacted},
   year = {2025},
   note = {Empirical study on Ethereum post-EIP-4844},
 }
+```
