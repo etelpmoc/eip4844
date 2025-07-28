@@ -50,3 +50,5 @@ This category includes 12 files spanning major rollup networks (Arbitrum, Optimi
 - **4_4_blob_gas_analysis**: Analyzes blob gas fees to understand the dynamics of the blob gas fee market.
 
 **Crawler:** Code for crawling Ethereum data, rollup data from various sources (specified in the code).
+
+- This is not necessary if you download preprocessed data from above google drive link.
