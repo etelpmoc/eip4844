@@ -19,7 +19,7 @@ We have collected logs from the prysm node before and after the Ethereum upgrade
 
 This dataset consists of 22 CSV files exported from MongoDB, organized into two primary categories: Consensus Layer Data and Rollup Layer Data. These files support all empirical analyses in our study and enable full reproduction of figures and results.
 
-### Consensus layer data (data/consensus)
+### Consensus layer data (data/consensus/)
 This category contains 10 files that capture block-level events, validator behavior, and propagation delays across three geographic regions (Virginia, Singapore, and Paris).
 
 | Filename                                                                                                     | Description                                                                                             |
